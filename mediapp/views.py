@@ -1,5 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from mediapp.models import *
+
 
 # Create your views here.
 def index(request):
@@ -62,6 +63,27 @@ def delete (request, id):
    deletedappointment= Appointment1.objects.get(id=id)
    deletedappointment.delete()
    return redirect('/show')
+
+def displaycontacts (request):
+    contacts = contact2.objects.all()
+    return render (request, 'displaycontacts.html', {'all':contacts})
+
+def edit(request,id):
+    editinfo = get_object_or_404(Appointment1,id=id)
+    if request.method == 'POST':
+        editinfo.name = request.POST.get('name')
+        editinfo.email = request.POST.get('email')
+        editinfo.phone = request.POST.get('phone')
+        editinfo.date = request.POST.get('date')
+        editinfo.department = request.POST.get('department')
+        editinfo.doctor = request.POST.get('doctor')
+        editinfo.message = request.POST.get('message')
+        editinfo.save()
+        return redirect("/show")
+
+    else:
+        return render (request,'edit.html', {'editinfo':editinfo})
+
 
 
 
