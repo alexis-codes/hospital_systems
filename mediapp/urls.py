@@ -4,7 +4,7 @@ from mediapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index,name='index'),
+    path('home/', views.index,name='index'),
     path('starter/', views.starter,name='starter-page'),
     path('about/', views.about ,name='about'),
     path('services/', views.services,name='services'),
@@ -16,5 +16,7 @@ urlpatterns = [
     path('delete/<int:id>', views.delete,),
     path('displaycontacts/', views.displaycontacts, name='contacts'),
     path('edit/<int:id>', views.edit, name='edit'),
+    path('', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
 
 ]
